@@ -42,13 +42,13 @@ __global__ void p_j(float *p, int nx, int ny) {
   int j = blockIdx.y * blockDim.y + threadIdx.y;
   if (j < ny) {
     p[j * nx] = p[j * nx + 1];
-    p[j * nx + nx - 1] = p[j * nx + nx - 2]; //todo: check
+    p[j * nx + nx - 1] = p[j * nx + nx - 2];
   }
 }
 
 __global__ void p_i(float *p, int nx, int ny) {
   int i = blockIdx.x * blockDim.x + threadIdx.x;
-  if (i < nx) { //todo: check
+  if (i < nx) {
     p[i] = p[nx + i];
     p[(ny - 1) * nx + i] = 0;
   }
@@ -57,7 +57,7 @@ __global__ void p_i(float *p, int nx, int ny) {
 __global__ void u_and_v(float *u, float *v, float *un, float *vn, float *p, double dx, double dy, double dt, double rho, double nu, int nx, int ny) {
   int i = blockIdx.x * blockDim.x + threadIdx.x;
   int j = blockIdx.y * blockDim.y + threadIdx.y;
-  if (i > 0 && i < nx - 1 && j > 0 && j < ny - 1) { //todo check
+  if (i > 0 && i < nx - 1 && j > 0 && j < ny - 1) {
     u[j * nx + i] = un[j * nx + i] - un[j * nx + i] * dt / dx * (un[j * nx + i] - un[j * nx + i - 1]) -
                     un[j * nx + i] * dt / dy * (un[j * nx + i] - un[(j - 1) * nx + i]) -
                     dt / (2 * rho * dx) * (p[j * nx + i + 1] - p[j * nx + i - 1]) +
