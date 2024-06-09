@@ -50,7 +50,7 @@ int main() {
     for (int it=0; it<nit; it++) {
       for (int j=0; j<ny; j++)
         for (int i=0; i<nx; i++)
-	  pn[j][i] = p[j][i];
+	        pn[j][i] = p[j][i];
       for (int j=1; j<ny-1; j++) {
         for (int i=1; i<nx-1; i++) {
 	        // Compute p[j][i]
